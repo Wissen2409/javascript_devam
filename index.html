@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script>
+
+        //p.innerHTML = "Ben p'yim";
+        // textarea üzerinde, klavyeden tuşa basıldığında onkeypress çalışır!!
+
+        // onkeypress bir event'dir!! Event bir olay demektir. Bir olay olduğunda, fonksiyon çalıştırılır ve olay olduğunda olacak olaylar bu fonksiyon iiçerisinde olur!!
+
+        var myfunction = function () {
+            var textarea = document.getElementById("area");
+            var p = document.getElementById("pelement");
+            var kalan = 140-textarea.value.length;
+
+            p.innerHTML=kalan;
+
+        }
+
+        /*140 karakterlik bir uzunluk sınırımız olsun!! 
+        // 140 dan geriye doğru sayalım!!!*/
+
+    </script>
+</head>
+<body>
+    <!--bir text area içerisindeki yazının uzunluğunu başka bir elemente yazdıralım -->
+    <textarea maxlength="140" onkeypress="myfunction()" cols="30" rows="10" id="area"></textarea>
+    <br>
+    <p>Kalan Karakter : <span id="pelement"></span></p>
+</body>
+
+</html>

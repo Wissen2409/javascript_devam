@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        input[type="button"]{
+
+            width: 200px;
+            height: 50px;
+        }
+        div{
+            width: 600px;
+            height: 600px;
+            border:3px solid black
+        }
+    </style>
+    <script>
+
+
+        
+        function buttonClik(){
+
+
+           // 3 tane butona tıklanılınca, bu fonksiyona geliniyor, 
+
+           // hangi butonun tıkladığını bilmek için event.target kullanıyoruz,
+
+           // event.target bize tıklanılan butonun nesnesini gönderiyor.
+           var selectedButton =  event.target;
+            
+           debugger;
+           var selectedDiv = document.getElementById("div");
+
+           // tıklanılan butonun, value sundaki değeri alıp, div'in background'una bastık!!!
+           selectedDiv.style.backgroundImage=selectedButton.defaultValue;
+           // default value
+
+
+        }
+
+
+    </script>
+</head>
+
+<body>
+    
+    <input onmousemove="buttonClik()" style="background-color: red;"  id="kirmizi" type="button" value="https://picsum.photos/id/237/600/600">
+    <input onmousemove="buttonClik()" style="background-color: yellow;" id="sari" type="button" value="https://picsum.photos/id/238/600/600">
+    <input onmousemove="buttonClik()"  style="background-color: gray;" id="siyah" type="button" value="https://picsum.photos/id/239/600/600">
+    <div id="div">
+
+    </div>
+</body>
+</html>
