@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+
+        // windows.onload, sayfadaki tüm elementlerin ve stillerin yüklendikten sonra çalışır!!!
+
+
+
+
+        window.onload = () => {
+
+
+            // sayfa ilk yüklendiğinde,
+            verileriGetir();
+        }
+
+
+        function verileriGetir() {
+
+
+            // gelen butonu yakalayalım
+
+
+            var urlDefault = 'https://rickandmortyapi.com/api/character';
+            if (event.target.tagName != undefined) {
+
+                // gelen veri input ise
+                urlDefault = event.target.getAttribute('url');
+            }
+            var container = document.getElementById("container");
+            var nextbutton = document.getElementById("next");
+            var prevbutton = document.getElementById("prev");
+
+            fetch(urlDefault)
+                .then(response => response.json())
+                .then(data => {
+
+
+                    // next ve prev buttonlar koyduk ve bu butonlara bastıkça sayfa da geri ve ileri yapacağız!
+                    nextbutton.setAttribute('url', data.info.next);
+                    prevbutton.setAttribute('url', data.info.prev);
+
+                    for (var i = 0; i < data.results.length; i++) {
+                        var resultSet = data.results[i];
+
+
+
+                        // fetch metodundan gelen sorgu sonucu kadar img üretmeliyim!!!
+                        var createdImg = document.createElement('img');
+                        createdImg.src = resultSet.image;
+                        createdImg.style.margin = '20px';
+                        // oluşturduğumuz img elemenetini, container div'e ekleyelim 
+
+                        // document.createElement ile oluşturulan element, bir div içerisine ekleniyor!!
+                        container.appendChild(createdImg);
+                    }
+                });
+        }
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+    <div style="justify-content: center;text-align: center;display: flex;" id="kontroldiv">
+        <input onclick="verileriGetir()" id="prev" type="button" value="Prev">
+        <input onclick="verileriGetir()" id="next" type="button" value="Next">
+
+    </div>
+    <div id="container"></div>
+</body>
+
+</html>
