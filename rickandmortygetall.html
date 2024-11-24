@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+
     <script>
 
         // windows.onload, sayfadaki tüm elementlerin ve stillerin yüklendikten sonra çalışır!!!
@@ -19,12 +20,24 @@
         }
 
 
+        function imgRemove() {
+
+            var container = document.getElementById("container");
+            // container  içerdisindeki img kontrollerini yakala
+
+            // div içerisindeki img leri yakalamak içim!!!
+            var allImg = container.querySelectorAll('img');
+
+            // yakaladğımız tüm img'leri sil!! döngü ile dönerek!!
+            allImg.forEach(image => {
+                // div içerisindeki imgleri yakaladık foreach ile gezerek sildik'''
+                image.remove();
+            });
+
+        }
         function verileriGetir() {
 
-
             // gelen butonu yakalayalım
-
-
             var urlDefault = 'https://rickandmortyapi.com/api/character';
             if (event.target.tagName != undefined) {
 
@@ -32,27 +45,46 @@
                 urlDefault = event.target.getAttribute('url');
             }
             var container = document.getElementById("container");
+            // container içerisinde bir önceki sefer getilen veriler ile oluşturulan img kontrollerini sil!!
+
             var nextbutton = document.getElementById("next");
             var prevbutton = document.getElementById("prev");
+
+            //imgRemove();
+
+            container.innerHTML = null;
+            // yeni veri getirilmeden bir önceki img elementlerini silmek için 2 yöntem yaptık.
+
+            // 1. yöntem: container içerisindeki tüm imgleri sildik!! ImgRemove metodu içerisinde
+            // 2. yöntem container içerisindeki InnerHtml'i null yaptık buda,  container içerisindeki imgleri silmek anlamına gelir!!
+
 
             fetch(urlDefault)
                 .then(response => response.json())
                 .then(data => {
-
-
                     // next ve prev buttonlar koyduk ve bu butonlara bastıkça sayfa da geri ve ileri yapacağız!
                     nextbutton.setAttribute('url', data.info.next);
-                    prevbutton.setAttribute('url', data.info.prev);
+
+
+                    // sayfa yüklenince, geri butonua basıldığında, boş sayfa gelmesin, default sayfa gelsin!!
+                    if (data.info.prev == null) {
+
+                        prevbutton.setAttribute('url', urlDefault);
+                    }
+                    else {
+                        prevbutton.setAttribute('url', data.info.prev);
+                    }
+
+
 
                     for (var i = 0; i < data.results.length; i++) {
                         var resultSet = data.results[i];
-
-
 
                         // fetch metodundan gelen sorgu sonucu kadar img üretmeliyim!!!
                         var createdImg = document.createElement('img');
                         createdImg.src = resultSet.image;
                         createdImg.style.margin = '20px';
+                        createdImg.style.border='2px solid black';
                         // oluşturduğumuz img elemenetini, container div'e ekleyelim 
 
                         // document.createElement ile oluşturulan element, bir div içerisine ekleniyor!!
