@@ -34,8 +34,10 @@
            debugger;
            var selectedDiv = document.getElementById("div");
 
+           var imageurl = selectedButton.getAttribute("imageurl");
+
            // tıklanılan butonun, value sundaki değeri alıp, div'in background'una bastık!!!
-           selectedDiv.style.backgroundImage=selectedButton.defaultValue;
+           selectedDiv.style.backgroundImage="url('"+imageurl+"')";
            // default value
 
 
@@ -47,9 +49,9 @@
 
 <body>
     
-    <input onmousemove="buttonClik()" style="background-color: red;"  id="kirmizi" type="button" value="https://picsum.photos/id/237/600/600">
-    <input onmousemove="buttonClik()" style="background-color: yellow;" id="sari" type="button" value="https://picsum.photos/id/238/600/600">
-    <input onmousemove="buttonClik()"  style="background-color: gray;" id="siyah" type="button" value="https://picsum.photos/id/239/600/600">
+    <input onmousemove="buttonClik()" style="background-color: red;"  id="kirmizi" type="button" value="Resim1"  imageurl="https://picsum.photos/id/237/600/600">
+    <input onmousemove="buttonClik()" style="background-color: yellow;" id="sari" type="button" value="Resim2" imageurl="https://picsum.photos/id/238/600/600">
+    <input onmousemove="buttonClik()"  style="background-color: gray;" id="siyah" type="button" value="Resim3" imageurl="https://picsum.photos/id/239/600/600">
     <div id="div">
 
     </div>
