@@ -1,11 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .container {
+
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+        }
+    </style>
+    <script>
+
+        window.onload = () => {
+
+
+            // sayfa ilk yüklendiğinde,
+            var queryString = window.location.search;
+            var urlParameters = new URLSearchParams(queryString);
+            var selectedId = urlParameters.get('id');
+
+            // diğer sayfadan gelen id değerini alıp, tekrardan rick and morty sayfasına gidip, o elemana ait diğer detayları çekiyor olmam lazım!!
+
+            // fetch!!
+
+            var img = document.getElementById("img");
+            var name = document.getElementById("name");
+            var isalive = document.getElementById("status");
+            var gender = document.getElementById("gender");
+            var urlDefault = 'https://rickandmortyapi.com/api/character/'+selectedId;
+            fetch(urlDefault)
+                .then(response => response.json())
+                .then(data => {
+                    // next ve prev buttonlar koyduk ve bu butonlara bastıkça sayfa da geri ve ileri yapacağız!
+                    img.src=data.image;
+                    name.value=data.name;
+                    //isalive.value=data.status;
+                    gender.value=data.gender;
+
+                });
+        }
+
+    </script>
 </head>
+
 <body>
-    
+    <div class="container">
+
+        <img id="img">
+        <input id="name" type="text">
+        <input id="isalive" type="text">
+        <input id="gender" type="text">
+        <input>
+    </div>
 </body>
+
 </html>
