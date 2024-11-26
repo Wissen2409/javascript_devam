@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        .container {
+            width: 500px;
+            height: 500px;
+            background-color: deeppink;
+        }
+    </style>
+    <script>
+        // jquery'de, jquery'lerin html elementleri yüklemesini beklemek için document.ready kullanıyoruz!!!
+        $(document).ready(function () {
+
+            $(".show").click(function () {
+
+                $(".container").fadeIn('slow');
+                // dinamik olarak bir div oluşturduk!!!
+                var newDiv = $('<div>',{
+
+                    id:'4',
+                    class:'container',
+                });
+
+                // oluşturulan yeni div'i dom'a ekleyelim 
+                $('body').append(newDiv);
+                
+                // class'ı show olan input'a basıldığında;
+                
+            });
+            $(".hide").click(function () {
+
+                //class'ı hide olan input'a basıldığında
+
+                // div'i gizleyelim
+                $(".container").fadeOut('slow');
+
+            });
+
+        });
+
+
+        function Test(){
+
+
+        }
+
+
+
+    </script>
+
+</head>
+
+<body>
+    <div class="container"></div>
+    <input class="show" type="button" value="Göster">
+    <input class="hide" type="button" value="Gizle">
+
+    <p class="show">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, deleniti!</p>
+</body>
+
+</html>
