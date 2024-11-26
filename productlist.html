@@ -5,44 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+
+    <style>
+        img {
+
+            width: 200px !important;
+            height: 300px !important;
+            object-fit: contain;
+        }
 
         .container{
 
-            text-align: center;
-            justify-content: center;
-        }
-        img{
-            width: 200px;
-            height: 300px;
-            object-fit: cover;
-        }
-        .icdiv {
+            width: 80%;
+            margin: 20px auto;
             display: flex;
-            flex-direction: column;
-            text-align: center;
-            border: 2px solid black;
-            margin: 10px;
-            width: 400px;
-            height: 350px;
-            float: left;
-          
-        }
-        input[type='text']{
-            font-size: 20px;
-            font-family: Georgia, 'Times New Roman', Times, serif;
-        }
-        img {
+            flex-wrap: wrap;
 
-            width: 100%;
-            width: 400px;
-            position: relative;
-            top: 0px;
-            left: 0px;
+
+
         }
     </style>
+
     <script>
 
         // dom yüklenmeden önce, elementler yüklenmesi için
@@ -55,41 +43,67 @@
                 .then(res => res.json())
                 .then(json => {
 
+                    /*                    
+                    <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                    </div>
+                    */
 
+
+                    // aşağıda dinamaik üretilen tüm elementlere bootstrapt css uygulandı!!!
                     json.forEach(function (key, index) {
 
-                        
                         let divElement = document.createElement("div");
-                        divElement.className="icdiv";
+                        divElement.className = "card";
+                        divElement.style="width:18rem;";
 
-                        debugger;
                         let imgElement = document.createElement("img");
-                        let inputElement = document.createElement("input");
-                        let numberinputElement = document.createElement("input");
-                        inputElement.type = "text";
-                        numberinputElement.type="text";
+                        imgElement.className = "card-img-top";
 
-                        // gelen resmi kontrole verelim!!
-                        imgElement.src=key.image;
+                        // resmi verdik!!
+                        imgElement.src = key.image;
 
-                        //inputları bağlayalım!!
+                        let innerDivElement = document.createElement("div");
+                        innerDivElement.className = "card-body";
 
-                        inputElement.value=key.title;
-                        numberinputElement.value=key.price;
+                        let h5Element = document.createElement("h5");
+                        h5Element.className = "card-title";
 
-                        // verileri bind edelim!!
+                        h5Element.innerText = key.title;
+
+                        let pElement = document.createElement("p");
+                        pElement.className = "card-text";
+
+                        pElement.innerText = key.description;
+
+                        let aElement = document.createElement("a");
+                        aElement.className = "btn btn-primary";
+
+                        aElement.href="productdetail.html?productid="+key.id;
+                        aElement.innerText="Detay";
+
+                        // bunları iç içe verelim 
+                        innerDivElement.appendChild(h5Element);
+                        innerDivElement.appendChild(pElement);
+                        innerDivElement.appendChild(aElement);
+
                         divElement.appendChild(imgElement);
-                        divElement.appendChild(inputElement);
-                        divElement.appendChild(numberinputElement);
-                        // elemanlar div'in içerisine eklendi. div'de container'in içerisine eklensin!!
+                        divElement.appendChild(innerDivElement);
+
+                        // en son dıştaki div'i body'ye ekleyelim 
+
+                        let container = document.getElementById("container");
+
                         container.appendChild(divElement);
-
-
 
                     });
 
                     // verilerin geldiğini görelim!!
-
 
                 });
 
@@ -101,7 +115,12 @@
 </head>
 
 <body>
+
     <div id="container" class="container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+        
 </body>
 
 </html>
