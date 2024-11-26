@@ -14,7 +14,7 @@
             // sayfa ilk yüklendiğinde,
             verileriGetir();
         }
-   
+
         function imgRemove() {
 
             var container = document.getElementById("container");
@@ -58,41 +58,38 @@
             fetch(urlDefault)
                 .then(response => response.json())
                 .then(data => {
-                    // next ve prev buttonlar koyduk ve bu butonlara bastıkça sayfa da geri ve ileri yapacağız!
+                    // Next ve prev butonlarına URL'leri ayarlama
                     nextbutton.setAttribute('url', data.info.next);
 
-
-                    // sayfa yüklenince, geri butonua basıldığında, boş sayfa gelmesin, default sayfa gelsin!!
                     if (data.info.prev == null) {
-
                         prevbutton.setAttribute('url', urlDefault);
-                    }
-                    else {
+                    } else {
                         prevbutton.setAttribute('url', data.info.prev);
                     }
-                    for (var i = 0; i < data.results.length; i++) {
-                        var resultSet = data.results[i];
 
-                        // fetch metodundan gelen sorgu sonucu kadar img üretmeliyim!!!
-                        var createdImg = document.createElement('img');
+                    for (let i = 0; i < data.results.length; i++) { // let kullanımı
+                        let resultSet = data.results[i]; // let ile blok seviyesinde tanımlama
+
+                        // img oluşturma ve özelliklerini ayarlama
+                        let createdImg = document.createElement('img'); // let ile img tanımlama
                         createdImg.src = resultSet.image;
                         createdImg.style.margin = '20px';
-                        createdImg.style.border='2px solid black';
-                        createdImg.setAttribute("detailid",resultSet.id);
-                        
-                        // oluşturduğumuz img elemenetini, container div'e ekleyelim 
-                        // document.createElement ile oluşturulan element, bir div içerisine ekleniyor!!
-                        // img'lere click eventi eklesek 
-                        createdImg.addEventListener('click',function(){
+                        createdImg.style.border = '2px solid black';
+                        createdImg.setAttribute("detailid", resultSet.id);
 
-                            // img'lerin üzerine basıldığında, window.location.href dediğimiz şey
-                            // browserdeki adresi değiştirmek!!
-
-                            // karakterin id değeri data.result.id
-                           var detailid=createdImg.getAttribute("detailid");
-                            window.location.href="rickdetail.html?id="+detailid;
+                        // Click event ekleme
+                        createdImg.addEventListener('click', function () {
+                            let detailid = createdImg.getAttribute("detailid");
+                            window.location.href = "rickdetail.html?id=" + detailid;
                         });
+
+                        // img'yi container'a ekleme
                         container.appendChild(createdImg);
+
+                        // var ve let : 
+
+                        // var tanımlandığı blok dışarıdan erişilebilir
+                        // let sadece tanımlandığı block içerisinden kullanılabilir!!
                     }
                 });
         }
