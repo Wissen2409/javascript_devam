@@ -78,6 +78,8 @@
                         createdImg.setAttribute("detailid", resultSet.id);
 
                         // Click event ekleme
+
+                        // Query String : 
                         createdImg.addEventListener('click', function () {
                             let detailid = createdImg.getAttribute("detailid");
                             window.location.href = "rickdetail.html?id=" + detailid;

@@ -12,14 +12,19 @@
             justify-content: center;
             text-align: center;
             flex-direction: column;
+            width: 50%;
         }
     </style>
     <script>
 
+
+        // sayfadaki tüm hrml elementleri yüklendi. artık javascript çalışabilir!!
         window.onload = () => {
 
 
             // sayfa ilk yüklendiğinde,
+
+            // diğer sayfadan gönderilen id parametresini yakalayalım!!
             var queryString = window.location.search;
             var urlParameters = new URLSearchParams(queryString);
             var selectedId = urlParameters.get('id');
@@ -51,7 +56,7 @@
 <body>
     <div class="container">
 
-        <img style="width:200px; height: 300px;" id="img">
+        <img style="width:400px; height: 500px;" id="img">
         <input id="name" type="text">
         <input id="isalive" type="text">
         <input id="gender" type="text">
